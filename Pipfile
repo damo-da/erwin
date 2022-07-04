@@ -7,6 +7,7 @@ name = "pypi"
 python-chess = "*"
 sqlalchemy = "*"
 psycopg2 = "*"
+click = "*"
 
 [dev-packages]
 pytest = "*"

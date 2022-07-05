@@ -1,8 +1,6 @@
 import click
-from chess import Board
-from chess.variant import AntichessBoard
 
-from solver.algo import get_result
+from solver.algo import Resolver
 from .options import OPTION_FEN
 
 
@@ -11,19 +9,20 @@ from .options import OPTION_FEN
 def solver(fen: str, variant: str = "antichess"):
     """Solve a given FEN."""
 
-    board: Board
-    if variant == "antichess":
-        board = AntichessBoard(fen)
-    else:
-        click.echo(f"Unknown variant: {variant}.", err=True)
-        return exit(2)
-
     click.echo("Solving FEN")
-    click.echo(board)
+
+    # board: Board
+    # if variant == "antichess":
+    #     board = AntichessBoard(fen)
+    # else:
+    #     click.echo(f"Unknown variant: {variant}.", err=True)
+    #     return exit(2)
+
+    # click.echo(board)
 
     click.echo()
 
-    result = get_result(board)
+    result = Resolver().get_result(starting_fen=fen)
 
     if result is None:
         click.echo("Unknown result")

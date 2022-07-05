@@ -9,8 +9,13 @@ LOSS = Termination.VARIANT_LOSS
 MAX_DEPTH = 6
 
 
+def hash_outcome(o: Outcome) -> int:
+    return hash((o.winner, o.termination.value))
+
+
 def fix_outcome(o: Optional[Outcome]) -> Optional[Outcome]:
-    if o is None: return None
+    if o is None:
+        return None
 
     if o.termination == LOSS:
         o.termination = WIN
@@ -23,3 +28,6 @@ def fix_outcome(o: Optional[Outcome]) -> Optional[Outcome]:
         raise Exception("Unknown outcome", o)
 
     return o
+
+
+Outcome.__hash__ = hash_outcome

@@ -1,1 +1,1 @@
-from .algo2 import get_result
+from .algo2 import Resolver

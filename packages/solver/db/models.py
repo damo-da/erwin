@@ -32,3 +32,15 @@ class GameResult(Base):
                           outcome_termination=outcome.termination.name,
                           outcome_winner=outcome.winner,
                           board_pos=board_pos)
+
+    @property
+    def outcome(self) -> Outcome:
+        return Outcome(winner=self.outcome_winner, termination=Termination[self.outcome_termination])
+
+
+class JobResult(Base):
+    __tablename__ = "job_results"
+
+    variant = Column(String(15), primary_key=True)
+    board_pos = Column(String(300), primary_key=True)
+    turn = Column(Boolean, primary_key=True)

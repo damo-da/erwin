@@ -1,6 +1,6 @@
 from chess import SQUARES, Move, Piece
 
-from solver import Resolver
+from erwin import Resolver
 
 
 def empty_board():

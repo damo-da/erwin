@@ -8,6 +8,7 @@ python-chess = "*"
 sqlalchemy = "*"
 psycopg2 = "*"
 click = "*"
+erwin = { path = "." }
 
 [dev-packages]
 pytest = "*"

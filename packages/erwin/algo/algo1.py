@@ -2,7 +2,7 @@ from typing import Optional
 
 from chess import Board, Outcome
 
-from solver.db import GameResult
+from erwin.db import GameResult
 from .db import get_result_from_db
 from .helpers import WIN, DRAW, MAX_DEPTH, fix_outcome
 

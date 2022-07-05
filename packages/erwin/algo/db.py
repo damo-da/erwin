@@ -2,7 +2,7 @@ from typing import Optional
 
 from chess import Outcome, Board, Termination
 
-from solver.db import GameResult, Session
+from erwin.db import GameResult, Session
 from .helpers import DRAW
 
 

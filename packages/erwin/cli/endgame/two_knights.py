@@ -2,8 +2,8 @@ import click
 from chess import Piece, SQUARES, SQUARE_NAMES
 from chess.variant import AntichessBoard
 
-from solver.algo import Resolver
-from solver.algo.helpers import print_result
+from erwin.algo import Resolver
+from erwin.algo.helpers import print_result
 from ..options import OPTION_VARIANT
 
 

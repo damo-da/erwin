@@ -1,4 +1,4 @@
-from .cli import solver
+from .cli import cli
 
 if __name__ == "__main__":
-    solver()
+    cli()

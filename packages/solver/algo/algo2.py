@@ -13,11 +13,13 @@ FEN = str
 
 
 class Resolver:
-    def __init__(self) -> None:
+    def __init__(self, verbose=False) -> None:
         self.results: dict[FEN, Optional[Outcome]] = defaultdict(lambda: None)
         self.parents: dict[FEN, set[FEN]] = defaultdict(set)
 
         self.sess = Session()
+
+        self.verbose = verbose
 
     def get_sub_results(self, node: FEN) -> dict[str, int]:
         sub_results = {"win": 0, "draw": 0, "lose": 0, "inconclusive": 0}
@@ -35,7 +37,8 @@ class Resolver:
         return sub_results
 
     def propagate(self, node: FEN):
-        print(f"Back propagation for {node}.")
+        if self.verbose:
+            print(f"Back propagation for {node}.")
 
         pool = {node}
         while pool:
@@ -70,7 +73,8 @@ class Resolver:
 
     def write_to_db(self) -> None:
         # Write results to database
-        print("Identifying new writes.")
+        if self.verbose:
+            print("Identifying new writes.")
 
         all_grs = {}
 
@@ -101,7 +105,8 @@ class Resolver:
         depth = 0
 
         while pool and not self.results[starting_fen]:
-            print(f"Depth: {depth}, turn: {AntichessBoard(list(pool)[0]).turn}")
+            if self.verbose:
+                print(f"Depth: {depth}, turn: {AntichessBoard(list(pool)[0]).turn}")
 
             new_pool: set[FEN] = set()
 

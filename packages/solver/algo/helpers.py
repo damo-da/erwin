@@ -30,4 +30,15 @@ def fix_outcome(o: Optional[Outcome]) -> Optional[Outcome]:
     return o
 
 
+def print_result(result: Optional[Outcome]):
+    if result is None:
+        print("Unknown result")
+    elif result.winner is True:
+        print("White wins.")
+    elif result.winner is False:
+        print("Black wins.")
+    else:
+        print("Draw.")
+
+
 Outcome.__hash__ = hash_outcome

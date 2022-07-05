@@ -1,1 +1,1 @@
-from .solver import solver
+from .group import cli

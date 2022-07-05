@@ -1,6 +1,5 @@
 from chess.variant import AntichessBoard
-from solver.main import get_result
-import pytest
+from erwin.main import get_result
 
 
 def test_win_in_0() -> None:

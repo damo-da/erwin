@@ -1,6 +1,5 @@
-import pytest
 from chess.variant import AntichessBoard
-from solver.main import get_result
+from erwin.main import get_result
 
 
 # @pytest.mark("populator")

@@ -1,45 +1,19 @@
-from chess import Board, Outcome, Termination
-from typing import Optional, Union
-from solver.db import GameResult
+from typing import Optional
 
-WIN = Termination.VARIANT_WIN
-DRAW = Termination.VARIANT_DRAW
-LOSS = Termination.VARIANT_LOSS
+from chess import Board, Outcome
 
-MAX_DEPTH = 6
-
-
-def fix_outcome(o: Optional[Outcome]) -> Optional[Outcome]:
-    if o is None: return None
-
-    if o.termination == LOSS:
-        o.termination = WIN
-        o.winner = not o.winner
-
-    elif o.termination in (Termination.INSUFFICIENT_MATERIAL, Termination.THREEFOLD_REPETITION):
-        o.termination = DRAW
-
-    if o.termination not in (WIN, DRAW):
-        raise Exception("Unknown outcome", o)
-
-    return o
+from erwin.db import GameResult
+from .db import get_result_from_db
+from .helpers import WIN, DRAW, MAX_DEPTH, fix_outcome
 
 
 def get_result(b: Board, depth=0, db_sess=None, cache=None) -> Optional[Outcome]:
     # Check if the position is in database
     if db_sess:
-        temp_ = GameResult.from_board(b, Outcome(termination=DRAW, winner=None))
-        r = db_sess.query(GameResult).filter(
-            GameResult.turn == temp_.turn,
-            GameResult.variant == temp_.variant,
-            GameResult.board_pos == temp_.board_pos,
-        ).first()
+        r = get_result_from_db(b, db_sess)
 
-        if r is not None:
-            return Outcome(
-                termination=Termination[r.outcome_termination],
-                winner=r.outcome_winner
-            )
+        if r:
+            return r
 
     if cache is None:
         cache = {}
